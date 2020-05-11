@@ -9,6 +9,7 @@ import (
 	jsoniter "github.com/json-iterator/go"
 )
 
+//Controller例外處理
 func ControllerErrorHandler(w http.ResponseWriter, r *http.Request) {
 	err := recover()
 	if err != nil {

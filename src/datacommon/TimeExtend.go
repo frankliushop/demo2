@@ -3,22 +3,13 @@ package datacommon
 import (
 	"database/sql/driver"
 	"fmt"
-
-	//"os"
 	"strings"
 	"time"
 
 	"github.com/jinzhu/now"
 )
 
-func init() {
-	//os.Setenv("TZ", "Asia/Taipei")
-	fmt.Println("load time zone")
-	timelocal, _ := time.LoadLocation("Asia/Taipei")
-	time.Local = timelocal
-	//time.LoadLocation("Asia/Taipei")
-}
-
+//時間結構
 type NullTime struct {
 	Time  time.Time
 	Valid bool // 是否有值
@@ -38,9 +29,10 @@ func (nt NullTime) Value() (driver.Value, error) {
 	return nt.Time, nil
 }
 
+//實現序列成json字串
 func (this *NullTime) MarshalJSON() ([]byte, error) {
 	if this.Time.IsZero() {
-		return nil, nil
+		return []byte("null"), nil
 	} else {
 		var stamp = fmt.Sprintf("\"%s\"", time.Time(this.Time).Format("2006-01-02 15:04:05"))
 		return []byte(stamp), nil
@@ -48,6 +40,7 @@ func (this *NullTime) MarshalJSON() ([]byte, error) {
 
 }
 
+//實現反序列成資料
 func (this *NullTime) UnmarshalJSON(data []byte) error {
 	var err error
 	strDate := string(data)

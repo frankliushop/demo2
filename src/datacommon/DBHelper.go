@@ -2,13 +2,14 @@ package datacommon
 
 import (
 	"database/sql"
+	"myproject1/dataconfig"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
 //開啟DB
 func OpenDB() *sql.DB {
-	db, err := sql.Open("mysql", "root:frank99@tcp(192.168.56.101:3306)/personDB?parseTime=true&loc=Local")
-
+	db, err := sql.Open("mysql", dataconfig.GlobalConfigData.SqlConnection)
 	if err != nil {
 		panic(
 			ExceptionData{
