@@ -15,6 +15,7 @@ import (
 
 func GetAll(w http.ResponseWriter, r *http.Request) {
 	defer datacontroller.ControllerErrorHandler(w, r)
+	datacontroller.ControllerCrossDomain(w, r)
 	list := personservice.GetAll()
 	resultResponse := datamodel.ResultResponse{
 		Result: true,
@@ -28,6 +29,7 @@ func GetAll(w http.ResponseWriter, r *http.Request) {
 
 func GetPerson(w http.ResponseWriter, r *http.Request) {
 	defer datacontroller.ControllerErrorHandler(w, r)
+	datacontroller.ControllerCrossDomain(w, r)
 	decoder := json.NewDecoder(r.Body)
 	var req personmodel.GetPersonRequest
 	decoder.Decode(&req)
@@ -48,6 +50,7 @@ func GetPerson(w http.ResponseWriter, r *http.Request) {
 
 func AddPerson(w http.ResponseWriter, r *http.Request) {
 	defer datacontroller.ControllerErrorHandler(w, r)
+	datacontroller.ControllerCrossDomain(w, r)
 	var req personmodel.AddPersonRequest
 	reqString, _ := ioutil.ReadAll(r.Body)
 	var json = jsoniter.ConfigCompatibleWithStandardLibrary
@@ -65,6 +68,7 @@ func AddPerson(w http.ResponseWriter, r *http.Request) {
 
 func UpdatePerson(w http.ResponseWriter, r *http.Request) {
 	defer datacontroller.ControllerErrorHandler(w, r)
+	datacontroller.ControllerCrossDomain(w, r)
 	decoder := json.NewDecoder(r.Body)
 	var req personmodel.UpdatePersonRequest
 	decoder.Decode(&req)
@@ -81,6 +85,7 @@ func UpdatePerson(w http.ResponseWriter, r *http.Request) {
 
 func DeletePerson(w http.ResponseWriter, r *http.Request) {
 	defer datacontroller.ControllerErrorHandler(w, r)
+	datacontroller.ControllerCrossDomain(w, r)
 	decoder := json.NewDecoder(r.Body)
 	var req personmodel.DeletePersonRequest
 	decoder.Decode(&req)
