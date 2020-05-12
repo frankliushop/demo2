@@ -2,18 +2,19 @@ package personmodel
 
 import (
 	"myproject1/datacommon"
+	"gopkg.in/guregu/null.v4"
 )
 
 type AddPersonRequest struct {
-	Name        datacommon.NullString `json:"name"`
-	Phone       datacommon.NullString `json:"phone"`
-	MobilePhone datacommon.NullString `json:"mobilePhone"`
-	Address     datacommon.NullString `json:"address"`
-	Birthday    datacommon.NullTime   `json:"birthday"`
+	Name        null.String `json:"name"`
+	Phone       null.String `json:"phone"`
+	MobilePhone null.String `json:"mobilePhone"`
+	Address     null.String `json:"address"`
+	Birthday    datacommon.NullTimeExtend   `json:"birthday"`
 }
 
 func (addPersonRequest *AddPersonRequest) CheckValue() {
-	if *addPersonRequest.Name.Data == "" || addPersonRequest.Name.Data == nil {
+	if datacommon.IsNullOrEmpty(addPersonRequest.Name) {
 		panic(datacommon.ExceptionData{
 			ErrorCode:    datacommon.ErrCodeParamterError,
 			ErrorMessage: "Name can not be empty",

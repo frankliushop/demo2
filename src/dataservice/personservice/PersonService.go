@@ -58,7 +58,7 @@ func AddPerson(model personmodel.AddPersonRequest) bool {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	res, err := statement.Exec(model.Name.Data, model.Phone.Data, model.MobilePhone.Data, model.Address.Data, model.Birthday)
+	res, err := statement.Exec(model.Name, model.Phone, model.MobilePhone, model.Address, model.Birthday)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -76,8 +76,8 @@ func UpdatePerson(model personmodel.UpdatePersonRequest) bool {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	res, err := statement.Exec(model.Name.Data, model.Phone.Data, model.MobilePhone.Data,
-		model.Address.Data, model.Birthday, model.ID)
+	res, err := statement.Exec(model.Name, model.Phone, model.MobilePhone,
+		model.Address, model.Birthday, model.ID)
 	if err != nil {
 		log.Fatal(err.Error())
 	}

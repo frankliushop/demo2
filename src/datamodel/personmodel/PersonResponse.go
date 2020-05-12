@@ -2,13 +2,15 @@ package personmodel
 
 import (
 	"myproject1/datacommon"
+
+	"gopkg.in/guregu/null.v4"
 )
 
 type PersonResponse struct {
-	ID          int32                 `json:"id"`
-	Name        datacommon.NullString `json:"name"`
-	Phone       datacommon.NullString `json:"phone"`
-	MobilePhone datacommon.NullString `json:"mobilePhone"`
-	Address     datacommon.NullString `json:"address"`
-	Birthday    datacommon.NullTime   `json:"birthday"`
+	ID          null.Int                  `json:"id"`
+	Name        null.String               `json:"name"`
+	Phone       null.String               `json:"phone"`
+	MobilePhone null.String               `json:"mobilePhone"`
+	Address     null.String               `json:"address"`
+	Birthday    datacommon.NullTimeExtend `json:"birthday"`
 }
