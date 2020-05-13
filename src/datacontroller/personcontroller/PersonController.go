@@ -63,6 +63,7 @@ func GetPerson(w http.ResponseWriter, r *http.Request) {
 //新增資料
 func AddPerson(w http.ResponseWriter, r *http.Request) {
 	defer datacontroller.ControllerErrorHandler(w, r)
+	datacontroller.ControllerCrossDomain(w, r)
 	if r.Method == "OPTIONS" {
 		return
 	}
@@ -85,6 +86,7 @@ func AddPerson(w http.ResponseWriter, r *http.Request) {
 //更新資料
 func UpdatePerson(w http.ResponseWriter, r *http.Request) {
 	defer datacontroller.ControllerErrorHandler(w, r)
+	datacontroller.ControllerCrossDomain(w, r)
 	if r.Method == "OPTIONS" {
 		return
 	}
@@ -106,6 +108,7 @@ func UpdatePerson(w http.ResponseWriter, r *http.Request) {
 //刪除資料
 func DeletePerson(w http.ResponseWriter, r *http.Request) {
 	defer datacontroller.ControllerErrorHandler(w, r)
+	datacontroller.ControllerCrossDomain(w, r)
 	if r.Method == "OPTIONS" {
 		return
 	}
