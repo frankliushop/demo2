@@ -2,34 +2,35 @@ package datacommon
 
 import (
 	"database/sql"
+	"log"
 	"myproject1/dataconfig"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-//開啟DB
-func OpenDB() *sql.DB {
-	db, err := sql.Open("mysql", dataconfig.GlobalConfigData.SqlConnection)
+var DbCon *sql.DB
+
+//初始化方法
+func init() {
+	var err error
+	DbCon, err = sql.Open("mysql", dataconfig.GlobalConfigData.SqlConnection)
 	if err != nil {
-		panic(
-			ExceptionData{
-				ErrorCode:    ErrCodeDBCanNotOpen,
-				ErrorMessage: err.Error(),
-			},
-		)
+		log.Fatalln(err)
 	}
 
-	db.SetMaxIdleConns(20)
-	db.SetMaxOpenConns(20)
+	DbCon.SetMaxIdleConns(200)
+	DbCon.SetMaxOpenConns(100)
 
-	if err := db.Ping(); err != nil {
-		//log.Fatalln(err)
-		panic(
-			ExceptionData{
-				ErrorCode:    ErrCodeDBCanNotOpen,
-				ErrorMessage: err.Error(),
-			},
-		)
+	if err = DbCon.Ping(); err != nil {
+		log.Fatalln(err)
 	}
-	return db
+}
+
+//計算總頁數
+func GetPageCount(pageSize int64,itemCount int64) int64 {
+	pageCount := itemCount / pageSize
+	if itemCount % pageSize > 0{
+		pageCount++
+	}
+	return pageCount
 }

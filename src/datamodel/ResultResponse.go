@@ -1,8 +1,8 @@
 package datamodel
 
 type ResultResponse struct {
-	Result  bool
-	Code    int16
-	Message string
-	Data    interface{}
+	Result  bool	`json:"result"`
+	Code    int16	`json:"code"`
+	Message string	`json:"message"`
+	DataResult    interface{}	`json:"dataResult"`
 }

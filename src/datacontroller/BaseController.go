@@ -24,10 +24,10 @@ func ControllerErrorHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		exp := err.(datacommon.ExceptionData)
 		resultResponse := datamodel.ResultResponse{
-			Result:  false,
-			Code:    exp.ErrorCode,
-			Message: exp.ErrorMessage,
-			Data:    nil,
+			Result:     false,
+			Code:       exp.ErrorCode,
+			Message:    exp.ErrorMessage,
+			DataResult: nil,
 		}
 		var json = jsoniter.ConfigCompatibleWithStandardLibrary
 		jsondata, _ := json.Marshal(&resultResponse)

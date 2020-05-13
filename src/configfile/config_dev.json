@@ -1,4 +1,6 @@
 {
     "workType" : "develop",
-    "sqlConnection" :"root:frank99@tcp(192.168.56.101:3306)/personDB?parseTime=true&loc=Local"
+    "sqlConnection" :"root:frank99@tcp(192.168.56.101:3306)/personDB?parseTime=true&loc=Local",
+    "port":8081
+
 }
