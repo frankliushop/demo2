@@ -123,7 +123,7 @@ func UpdatePerson(model personmodel.UpdatePersonRequest) bool {
 		log.Fatal(err.Error())
 	}
 	rowAffected, _ := res.RowsAffected()
-	return rowAffected > 0
+	return rowAffected >= 0
 }
 
 //刪除資料庫資料

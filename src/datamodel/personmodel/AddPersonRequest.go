@@ -10,7 +10,7 @@ type AddPersonRequest struct {
 	Phone       null.String `json:"phone"`
 	MobilePhone null.String `json:"mobilePhone"`
 	Address     null.String `json:"address"`
-	Birthday    datacommon.NullTimeExtend   `json:"birthday"`
+	Birthday    datacommon.NullDateExtend   `json:"birthday"`
 }
 
 func (addPersonRequest *AddPersonRequest) CheckValue() {
