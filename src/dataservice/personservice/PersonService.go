@@ -15,12 +15,14 @@ func GetAll(model *personmodel.GetAllRequest) *datamodel.PagingResponse {
 			PageIndex: model.PageIndex.Int64,
 			PageSize:  model.PageSize.Int64,
 			PageCount: 0,
+			ItemCount: 0,
 			DataList:  nil,
 		}
 	}
 	pagingResponse := getPersonList(model)
 	pageCount := datacommon.GetPageCount(model.PageSize.Int64, count)
 	pagingResponse.PageCount = pageCount
+	pagingResponse.ItemCount = count
 	return pagingResponse
 }
 
