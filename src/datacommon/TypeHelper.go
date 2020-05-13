@@ -1,7 +1,7 @@
 package datacommon
 
 import (
-	"gopkg.in/guregu/null.v4"
+	"gopkg.in/guregu/null.v3"
 )
 
 //字串是否爲空字串或nil

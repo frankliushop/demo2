@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/now"
-	"gopkg.in/guregu/null.v4"
+	"gopkg.in/guregu/null.v3"
 )
 
 type NullTimeExtend struct {

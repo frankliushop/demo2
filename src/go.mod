@@ -20,5 +20,6 @@ require (
 	golang.org/x/crypto v0.0.0-20200510223506-06a226fb4e37 // indirect
 	golang.org/x/sync v0.0.0-20200317015054-43a5402ce75a // indirect
 	golang.org/x/sys v0.0.0-20200509044756-6aff5f38e54f // indirect
+	gopkg.in/guregu/null.v3 v3.5.0
 	gopkg.in/guregu/null.v4 v4.0.0
 )

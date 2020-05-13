@@ -2,7 +2,7 @@ package personmodel
 
 import (
 	"myproject1/datacommon"
-	"gopkg.in/guregu/null.v4"
+	"gopkg.in/guregu/null.v3"
 )
 
 type AddPersonRequest struct {
