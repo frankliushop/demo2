@@ -32,7 +32,8 @@ func getPersonList(model *personmodel.GetAllRequest) *datamodel.PagingResponse {
 	rows, err := db.Query(`select ID,Name,Phone,MobilePhone,Address,Birthday from personInfo limit ?,?`,
 		skip, model.PageSize)
 
-	var records []personmodel.PersonResponse
+	var records []personmodel.PersonResponse = make([]personmodel.PersonResponse, 0,
+		int(model.PageSize.Int64))
 
 	for rows.Next() {
 		var rec personmodel.PersonResponse
