@@ -13,11 +13,12 @@ type AddPersonRequest struct {
 	Birthday    datacommon.NullDateExtend   `json:"birthday"`
 }
 //檢查必須輸入值是否存在
-func (this *AddPersonRequest) CheckValue() {
+func (this *AddPersonRequest) CheckValue() error {
 	if datacommon.IsNullOrEmpty(this.Name) {
-		panic(datacommon.ExceptionData{
+		return datacommon.ExceptionData{
 			ErrorCode:    datacommon.ErrCodeParamterError,
 			ErrorMessage: "Name can not be empty",
-		})
+		}
 	}
+	return nil
 }

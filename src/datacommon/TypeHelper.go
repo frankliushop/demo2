@@ -14,7 +14,7 @@ func IsNullOrEmpty(data null.String) bool {
 
 //檢查數字是否為nil或為0
 func IsNullOrZero(data null.Int) bool {
-	if data.Valid && !data.IsZero() {
+	if data.Valid && data.Int64 > 0 {
 		return false
 	}
 	return true

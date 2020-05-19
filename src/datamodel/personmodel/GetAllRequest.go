@@ -11,17 +11,18 @@ type GetAllRequest struct {
 }
 
 //檢查必須輸入值是否存在
-func (this *GetAllRequest) CheckValue() {
+func (this *GetAllRequest) CheckValue() error {
 	if datacommon.IsNullOrZero(this.PageIndex) {
-		panic(datacommon.ExceptionData{
+		return datacommon.ExceptionData{
 			ErrorCode:    datacommon.ErrCodeParamterError,
 			ErrorMessage: "pageIndex can not be empty or zero",
-		})
+		}
 	}
 	if datacommon.IsNullOrZero(this.PageSize) {
-		panic(datacommon.ExceptionData{
+		return datacommon.ExceptionData{
 			ErrorCode:    datacommon.ErrCodeParamterError,
 			ErrorMessage: "pageSize can not be empty or zero",
-		})
+		}
 	}
+	return nil
 }

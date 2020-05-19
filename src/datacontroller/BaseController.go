@@ -5,6 +5,7 @@ import (
 	"myproject1/datacommon"
 	"myproject1/datamodel"
 	"net/http"
+	"log"
 
 	jsoniter "github.com/json-iterator/go"
 )
@@ -18,20 +19,36 @@ func ControllerCrossDomain(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Expose-Headers", "Authorization")
 }
 
-//Controller例外處理
-func ControllerErrorHandler(w http.ResponseWriter, r *http.Request) {
-	err := recover()
+//處理錯誤
+func ErrorHandler(err error, w http.ResponseWriter) bool {
 	if err != nil {
-		exp := err.(datacommon.ExceptionData)
-		resultResponse := datamodel.ResultResponse{
-			Result:     false,
-			Code:       exp.ErrorCode,
-			Message:    exp.ErrorMessage,
-			DataResult: nil,
+		log.Println(err)
+		switch err.(type) {
+		case datacommon.ExceptionData:
+			exp := err.(datacommon.ExceptionData)
+			resultResponse := datamodel.ResultResponse{
+				Result:     false,
+				Code:       exp.ErrorCode,
+				Message:    exp.ErrorMessage,
+				DataResult: nil,
+			}
+			var json = jsoniter.ConfigCompatibleWithStandardLibrary
+			jsondata, _ := json.Marshal(&resultResponse)
+			jsonString := string(jsondata)			
+			fmt.Fprintf(w, jsonString)
+		case error:
+			resultResponse := datamodel.ResultResponse{
+				Result:     false,
+				Code:       datacommon.ErrCodeSystemError,
+				Message:    err.Error(),
+				DataResult: nil,
+			}
+			var json = jsoniter.ConfigCompatibleWithStandardLibrary
+			jsondata, _ := json.Marshal(&resultResponse)
+			jsonString := string(jsondata)
+			fmt.Fprintf(w, jsonString)
 		}
-		var json = jsoniter.ConfigCompatibleWithStandardLibrary
-		jsondata, _ := json.Marshal(&resultResponse)
-		jsonString := string(jsondata)
-		fmt.Fprintf(w, jsonString)
+		return true
 	}
+	return false
 }

@@ -16,18 +16,19 @@ type UpdatePersonRequest struct {
 }
 
 //檢查必須輸入值是否存在
-func (this *UpdatePersonRequest) CheckValue() {
+func (this *UpdatePersonRequest) CheckValue() error {
 	if datacommon.IsNullOrZero(this.ID) {
-		panic(datacommon.ExceptionData{
+		return datacommon.ExceptionData{
 			ErrorCode:    datacommon.ErrCodeParamterError,
 			ErrorMessage: "ID can not be empty",
-		})
+		}
 	}
 
 	if datacommon.IsNullOrEmpty(this.Name) {
-		panic(datacommon.ExceptionData{
+		return datacommon.ExceptionData{
 			ErrorCode:    datacommon.ErrCodeParamterError,
 			ErrorMessage: "Name can not be empty",
-		})
+		}
 	}
+	return nil
 }
