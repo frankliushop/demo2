@@ -10,6 +10,7 @@ type GetAllRequest struct {
 	PageSize null.Int `json:"pageSize"`
 }
 
+//檢查必須輸入值是否存在
 func (this *GetAllRequest) CheckValue() {
 	if datacommon.IsNullOrZero(this.PageIndex) {
 		panic(datacommon.ExceptionData{

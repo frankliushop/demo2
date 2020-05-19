@@ -11,41 +11,41 @@ type NullString struct {
 }
 
 //实现它的赋值方法(注意，这个方属于指针)
-func (ns *NullString) Scan(value interface{}) error {
-	ns.Valid = false
+func (this *NullString) Scan(value interface{}) error {
+	this.Valid = false
 	if value != nil {
 		var strData string
 		byteDatas, _ := value.([]byte)
 		strData = string(byteDatas)
-		ns.Data = &strData
-		ns.Valid = true
+		this.Data = &strData
+		this.Valid = true
 	}
 	return nil
 }
 
 //实现它的取值方式
-func (ns NullString) Value() (driver.Value, error) {
-	if !ns.Valid {
+func (this NullString) Value() (driver.Value, error) {
+	if !this.Valid {
 		return nil, nil
 	}
-	return *ns.Data, nil
+	return *this.Data, nil
 }
 
 //實現序列成json字串
-func (ns *NullString) MarshalJSON() ([]byte, error) {
-	if !ns.Valid {
+func (this *NullString) MarshalJSON() ([]byte, error) {
+	if !this.Valid {
 		return []byte("null"), nil
 	} else {
-		return []byte(*ns.Data), nil
+		return []byte(*this.Data), nil
 	}
 
 }
 
 //實現反序列成資料
-func (ns *NullString) UnmarshalJSON(data []byte) error {
+func (this *NullString) UnmarshalJSON(data []byte) error {
 	strData := string(data)
 	if strData != "null" {
-		ns.Data = &strData
+		this.Data = &strData
 	}
 	return nil
 }

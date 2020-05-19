@@ -9,8 +9,9 @@ type GetPersonRequest struct {
 	ID null.Int `json:"id"`
 }
 
-func (getPersonRequest *GetPersonRequest) CheckValue() {
-	if datacommon.IsNullOrZero(getPersonRequest.ID) {
+//檢查必須輸入值是否存在
+func (this *GetPersonRequest) CheckValue() {
+	if datacommon.IsNullOrZero(this.ID) {
 		panic(datacommon.ExceptionData{
 			ErrorCode:    datacommon.ErrCodeParamterError,
 			ErrorMessage: "ID can not be empty",

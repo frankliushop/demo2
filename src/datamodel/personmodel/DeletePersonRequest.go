@@ -9,8 +9,9 @@ type DeletePersonRequest struct {
 	ID null.Int `json:"id"`
 }
 
-func (deletePersonRequest *DeletePersonRequest) CheckValue() {
-	if datacommon.IsNullOrZero(deletePersonRequest.ID) {
+//檢查必須輸入值是否存在
+func (this *DeletePersonRequest) CheckValue() {
+	if datacommon.IsNullOrZero(this.ID) {
 		panic(datacommon.ExceptionData{
 			ErrorCode:    datacommon.ErrCodeParamterError,
 			ErrorMessage: "ID can not be empty",

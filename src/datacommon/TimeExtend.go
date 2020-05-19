@@ -16,17 +16,17 @@ type NullTime struct {
 }
 
 //实现它的赋值方法(注意，这个方属于指针)
-func (nt *NullTime) Scan(value interface{}) error {
-	nt.Time, nt.Valid = value.(time.Time)
+func (this *NullTime) Scan(value interface{}) error {
+	this.Time, this.Valid = value.(time.Time)
 	return nil
 }
 
 //实现它的取值方式
-func (nt NullTime) Value() (driver.Value, error) {
-	if !nt.Valid {
+func (this NullTime) Value() (driver.Value, error) {
+	if !this.Valid {
 		return nil, nil
 	}
-	return nt.Time, nil
+	return this.Time, nil
 }
 
 //實現序列成json字串

@@ -14,6 +14,7 @@ import (
 	jsoniter "github.com/json-iterator/go"
 )
 
+//處理全域panic
 func globalPanicHandler() {
 	if r := recover(); r != nil {
 		switch r.(type) {
@@ -31,6 +32,7 @@ func globalPanicHandler() {
 
 func main() {
 	defer globalPanicHandler()
+	//定義路由
 	r := mux.NewRouter()
 	r.HandleFunc("/", datacontroller.Home).Methods("GET", "OPTIONS")
 	r.HandleFunc("/GetAll", personcontroller.GetAll).Methods("POST", "OPTIONS")

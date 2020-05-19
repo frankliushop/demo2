@@ -15,15 +15,16 @@ type UpdatePersonRequest struct {
 	Birthday    datacommon.NullDateExtend `json:"birthday"`
 }
 
-func (updatePersonRequest *UpdatePersonRequest) CheckValue() {
-	if datacommon.IsNullOrZero(updatePersonRequest.ID) {
+//檢查必須輸入值是否存在
+func (this *UpdatePersonRequest) CheckValue() {
+	if datacommon.IsNullOrZero(this.ID) {
 		panic(datacommon.ExceptionData{
 			ErrorCode:    datacommon.ErrCodeParamterError,
 			ErrorMessage: "ID can not be empty",
 		})
 	}
 
-	if datacommon.IsNullOrEmpty(updatePersonRequest.Name) {
+	if datacommon.IsNullOrEmpty(this.Name) {
 		panic(datacommon.ExceptionData{
 			ErrorCode:    datacommon.ErrCodeParamterError,
 			ErrorMessage: "Name can not be empty",
